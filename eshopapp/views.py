@@ -28,11 +28,45 @@ from django.views.generic import View
 def getRoutes(request):
     return Response('Ahoj Tomasi')
 
-@api_view(['GET'])
+@api_view(['GET', 'OPTIONS'])  # Přidán OPTIONS pro CORS preflight
 def getProducts(request):
-    products=Products.objects.all()
-    serializer=ProductsSerializer(products, many=True)
-    return Response(serializer.data)
+    # Pokud je to OPTIONS požadavek, vrátíme CORS hlavičky
+    if request.method == 'OPTIONS':
+        response = HttpResponse()
+        response['Access-Control-Allow-Origin'] = '*'
+        response['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+        return response
+
+    try:
+        # Zalogování detailů požadavku
+        logger.info(f"Přijat požadavek: {request.method}")
+        logger.info(f"Headers: {request.headers}")
+        logger.info(f"Origin: {request.headers.get('Origin', 'Nezjištěn')}")
+
+        # Kontrola počtu produktů
+        products = Products.objects.all()
+        logger.info(f"Počet nalezených produktů: {products.count()}")
+
+        # Serializace produktů
+        serializer = ProductsSerializer(products, many=True)
+        
+        # Přidání CORS hlaviček do response
+        response = Response(serializer.data)
+        response['Access-Control-Allow-Origin'] = '*'
+        response['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        response['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+        
+        return response
+    
+    except Exception as e:
+        logger.error(f"Chyba při načítání produktů: {str(e)}")
+        error_response = Response(
+            {'error': str(e)}, 
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+        error_response['Access-Control-Allow-Origin'] = '*'
+        return error_response
 
 @api_view(['GET'])
 def getProduct(request, pk):
