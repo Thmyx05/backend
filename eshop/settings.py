@@ -60,10 +60,12 @@ REST_FRAMEWORK = {
     )
     
 }
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Pro vývoj na localhostu
-    "https://backend-ct8d.onrender.com",  # Tvoje produkční doména pro backend
+    "https://backend-ct8d.onrender.com",
+    "https://dusek-electropoint.onrender.com",  # Tvoje produkční doména pro backend
 ]
 
 
@@ -223,4 +225,20 @@ MEDIA_ROOT = 'static/images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGIN = [""]
+CORS_ALLOW_ALL_ORIGIN = ["https://dusek-electropoint.onrender.com"]
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS"
+]
+CORS_ALLOW_HEADERS = [
+    "content-type",
+    "authorization"
+]
+
