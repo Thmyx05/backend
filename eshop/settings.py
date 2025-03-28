@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'eshopapp',
     'rest_framework',
     'rest_framework_simplejwt',
+    "whitenoise.runserver_nostatic",
+    "django.contrib.staticfiles",
 ]
 
 REST_FRAMEWORK = {
@@ -73,7 +75,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -180,14 +181,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 
-# email credential for sending email
-# EMAIL_HOST='smtpout.secureserver.net'
-EMAIL_HOST='smtp.gmail.com'
-EMAIL_HOST_USER='tomik.dusek@email.cz'
-EMAIL_HOST_PASSWORD=''
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -206,7 +199,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE ="whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 MEDIA_URL='/images/'
 
@@ -221,51 +220,4 @@ MEDIA_ROOT = 'static/images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
-
 # Explicitní povolení origins
-CORS_ALLOWED_ORIGINS = [
-    'https://electropointmaturita.onrender.com',  # Vaše frontendová URL
-]
