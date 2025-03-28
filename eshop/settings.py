@@ -34,13 +34,12 @@ SECRET_KEY = 'django-insecure-%ej9yeag3-k%x-(ppbmxoil7-)f(mss)+t1872s8#bjsqow73!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["webovkabackend.onrender.com", "127.0.0.1", "localhost"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    "corsheaders",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,9 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'eshopapp',
     'rest_framework',
+    "corsheaders",
     'rest_framework_simplejwt',
-    "whitenoise.runserver_nostatic",
-    "django.contrib.staticfiles",
 ]
 
 REST_FRAMEWORK = {
@@ -71,16 +69,16 @@ REST_FRAMEWORK = {
 
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-
 ]
 
 ROOT_URLCONF = 'eshop.urls'
@@ -181,6 +179,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 
+# email credential for sending email
+# EMAIL_HOST='smtpout.secureserver.net'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='tomik.dusek@email.cz'
+EMAIL_HOST_PASSWORD=''
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -199,13 +205,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
-STORAGES = {
-    # ...
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+STATICFILES_STORAGE ="whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL='/images/'
 
@@ -220,4 +220,4 @@ MEDIA_ROOT = 'static/images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Explicitní povolení origins
+CORS_ALLOW_ALL_ORIGIN = [""]
