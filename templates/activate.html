@@ -1,0 +1,8 @@
+{% autoescape off %}
+
+Ahoj  {{user.name}}
+Klikni na tento odkaz níže a aktivuj si svůj účet
+
+http://{{domain}}{% url 'activate' uidb64=uid token=token %}
+
+{% endautoescape %}

@@ -1,0 +1,20 @@
+produkty = [
+    {
+        "_id":4,
+        "jmeno":"Kamera",
+        "Kategorie":"Fotak",
+        "Cena":15000
+    },
+        {
+        "_id":5,
+        "jmeno":"Kamera",
+        "Kategorie":"Fotak",
+        "Cena":15000
+    },
+        {
+        "_id":6,
+        "jmeno":"Kamera",
+        "Kategorie":"Fotak",
+        "Cena":15000
+    }
+]
