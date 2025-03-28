@@ -220,4 +220,4 @@ MEDIA_ROOT = 'static/images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGIN = ["https://electropoint.onrender.com", "http://localhost:3000"]
+CORS_ALLOW_ALL_ORIGIN = ["https://electropoint.onrender.com"]
