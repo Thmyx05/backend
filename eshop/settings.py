@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-%ej9yeag3-k%x-(ppbmxoil7-)f(mss)+t1872s8#bjsqow73!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["webovkabackend.onrender.com", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -69,8 +69,8 @@ REST_FRAMEWORK = {
 
 
 MIDDLEWARE = [
-
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
