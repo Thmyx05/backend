@@ -61,7 +61,10 @@ REST_FRAMEWORK = {
     
 }
 
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Pro vývoj na localhostu
+    "https://backend-ct8d.onrender.com",  # Tvoje produkční doména pro backend
+]
 
 
 
